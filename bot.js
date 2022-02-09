@@ -37,6 +37,10 @@ client.on('ready', () => {
 
 client.on('interactionCreate', async (interaction) => {
   if (!interaction.isCommand()) return;
+  if (!interaction.member.roles.cache.has(config.OPERATORS))
+    return await interaction.reply(
+      'You are not permitted to execute this command!'
+    );
 
   if (interaction.commandName === 'timeoutroulette') {
     var memberlist = await interaction.guild.members.list({ limit: 1000 });
